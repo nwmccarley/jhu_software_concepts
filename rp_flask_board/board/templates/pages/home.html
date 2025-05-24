@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+<!-- html file for the home page to display the home page content -->
+{% block content %}
+  <div class="full-width-row">
+    <div class="left-content">
+      <h1>Meet Nick!</h1>
+      <p>Nickolas Mccarley is an engineer / project manager for the Missile Defence Agency. He holds a batchelor's of Electrical Engineering and an MBA from the University of Alabama. This is his first semester in the Master's of Artifical Intelligence Program. </p>
+    </div>
+    <img src="{{ url_for('static', filename='banner.PNG') }}" alt="Welcome Banner" class="right-banner">
+  </div>
+{% endblock %}

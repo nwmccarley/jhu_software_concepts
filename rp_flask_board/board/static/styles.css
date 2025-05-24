@@ -1,0 +1,73 @@
+/* This is the CSS styles page to customize the html displays */
+/* Set margins to 0 to start */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+/* custom colers for the banner and banner text */
+a, a:visited {
+  color: #007bff;
+}
+a:hover {
+  color: #000000;
+}
+a:active {
+  color: #b30000;
+}
+
+/* Nav bar style and spacing */
+nav ul {
+  list-style-type: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #333;
+  padding: 5px;
+  color: white;
+}
+nav ul li {
+  display: inline;
+  margin: 0 5px;
+}
+nav a.active {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  border-bottom: 2px solid #007BFF;
+}
+
+/* Heading */
+h1 {
+  margin-top: 50px;
+  text-align: left;
+}
+
+/* Full-width content row with image floated right */
+.full-width-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* Make the text on the left side */
+.left-content {
+  text-align: left;
+  flex: 1;
+}
+
+/* Make the image on the right side */
+.right-banner {
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+  margin-left: 20px;
+}
