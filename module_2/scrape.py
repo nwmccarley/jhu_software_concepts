@@ -27,7 +27,7 @@ def scrape_data(pages=1):
 
     for page_num in range(1, pages + 1):
         url = f"https://www.thegradcafe.com/survey/?page={page_num}"
-        print(f"🔎 Fetching: {url}")
+        print(f" Fetching: {url}")
 
         try:
             page = urlopen(url)
@@ -69,4 +69,4 @@ def scrape_data(pages=1):
     save_data(all_results)
 
 if __name__ == "__main__":
-    scrape_data(pages=25)  
+    scrape_data(pages=10)  
