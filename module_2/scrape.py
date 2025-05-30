@@ -69,4 +69,4 @@ def scrape_data(pages=1):
     save_data(all_results)
 
 if __name__ == "__main__":
-    scrape_data(pages=10)  
+    scrape_data(pages=15)  
