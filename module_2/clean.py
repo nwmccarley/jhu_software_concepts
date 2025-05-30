@@ -1,13 +1,13 @@
 from bs4 import BeautifulSoup
 import re
-
-def clean_data(main_tr, detail_tr=None, entry_number=1):
-    td_tags = main_tr.find_all("td")
+#Function to clean data from the grad cafe
+def clean_data(main_tr, detail_tr=None, entry_number=1): 
+    td_tags = main_tr.find_all("td") # Extract all <td> tags from the main row
     td_values = [td.get_text(strip=True) for td in td_tags]
 
     if len(td_values) < 3:
         return None
-
+#basic structure of data
     institution = td_values[0]
     program_degree = td_values[1]
     date_added = td_values[2]
@@ -40,7 +40,7 @@ def clean_data(main_tr, detail_tr=None, entry_number=1):
             gre_aw = gre_aw_match.group(1) if gre_aw_match else "None"
             applicant_status = applicant_match.group(1) if applicant_match else "None"
 
-            # ✅ Extract all <p> tag comments from the entire detail row
+            #  Extract all <p> tag comments from the entire detail row to identify comments
             if detail_tr and detail_tr.find_next_sibling("tr"):
                 possible_comment_tr = detail_tr.find_next_sibling("tr")
                 if possible_comment_tr:
@@ -60,17 +60,19 @@ def clean_data(main_tr, detail_tr=None, entry_number=1):
 
     return {
         "Entry": entry_number,
-        "Institution": institution,
         "Program": program,
-        "Degree": degree,
-        "Decision": decision,
-        "Date Added": date_added,
-        "Semester": semester,
-        "GPA": gpa,
+        "University": institution,
+        "Comments": comments,
+        "Date Information Added to Grad Cafe": date_added,
+        "Url link": more_info_link,
+        "Applicant Status": decision,
+        "Start Date": semester,
+        "International/American Student": applicant_status,
         "GRE": gre,
         "GRE V": gre_v,
-        "GRE AW": gre_aw,
-        "International/American Student": applicant_status,
-        "Comments": comments,
-        "More Info Link": more_info_link
+        "Degree": degree,
+        "GPA": gpa,
+        "GRE AW": gre_aw
+
+    
     }

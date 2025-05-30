@@ -4,13 +4,13 @@ from clean import clean_data
 import json
 import re
 
-# 🔹 Save data to JSON file
+#  Save data to JSON file
 def save_data(data, filename="applicant_data.json"):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f" Saved {len(data)} entries to {filename}")
 
-# 🔹 Load data from JSON file (optional use)
+# Load data from JSON file (optional use)
 def load_data(filename="applicant_data.json"):
     try:
         with open(filename, "r", encoding="utf-8") as f:
@@ -21,31 +21,29 @@ def load_data(filename="applicant_data.json"):
         print(f" File '{filename}' not found.")
         return []
 
-# 🔹 Main scraper
+#  Main scraper
 def scrape_data(pages=1):
     all_results = []
 
-    for page_num in range(1, pages + 1):
-        url = f"https://www.thegradcafe.com/survey/?page={page_num}"
-        print(f" Fetching: {url}")
+    for page_num in range(1, pages + 1): #main loop starting from most recent page
+        url = f"https://www.thegradcafe.com/survey/?page={page_num}"  #url for the most recent grad cafe
+        print(f" Fetching: {url}") #message to show what page the system is on
 
         try:
             page = urlopen(url)
-            soup = BeautifulSoup(page.read(), "html.parser")
-        except Exception as e:
+            soup = BeautifulSoup(page.read(), "html.parser") #parse through beautiful soup
+        except Exception as e: #error handling
             print(f" Failed to fetch page {page_num}: {e}")
             continue
 
         table_body = soup.find("tbody")
         rows = table_body.find_all("tr") if table_body else []
-        print(f" Found {len(rows)} rows in <tbody> on page {page_num}")
+        print(f" Found {len(rows)} rows in <tbody> on page {page_num}") #row count
 
         i = 0
         while i < len(rows):
             row = rows[i]
-            tds = row.find_all("td")
-
-            # Identify main entry by structure: 5 tds + result link
+            tds = row.find_all("td") # Identify main entry by structure: 5 tds + result link
             is_main = len(tds) == 5 and tds[-1].find("a", href=re.compile(r"^/result/"))
 
             if is_main:
@@ -68,5 +66,5 @@ def scrape_data(pages=1):
 
     save_data(all_results)
 
-if __name__ == "__main__":
-    scrape_data(pages=15)  
+if __name__ == "__main__": #main function where number of pages to scrape is set
+    scrape_data(pages=505)  
