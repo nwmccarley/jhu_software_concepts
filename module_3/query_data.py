@@ -6,56 +6,55 @@ def get_all_query_results():
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
 
-    # Question 1
-    cur.execute("SELECT COUNT(*) FROM applicants WHERE TRIM(start_date) = 'Fall 2024';")
+    # Question 1 query
+    cur.execute("SELECT COUNT(*) FROM applicants WHERE TRIM(term) = 'Fall 2025';")
     q1 = cur.fetchone()[0]
 
-    # Question 2
+    # Question 2 query
     cur.execute("SELECT COUNT(*) FROM applicants;")
     total = cur.fetchone()[0]
-    cur.execute("SELECT COUNT(*) FROM applicants WHERE LOWER(applicant_type) = 'international';")
+    cur.execute("SELECT COUNT(*) FROM applicants WHERE LOWER(us_or_international) = 'international';")
     intl = cur.fetchone()[0]
     q2 = round((intl / total) * 100, 2) if total else 0
 
-    # Question 3
+    # Question 3 query
     cur.execute("""
-        SELECT ROUND(AVG(gpa)::numeric, 2), 
-               ROUND(AVG(gre)::numeric, 2), 
-               ROUND(AVG(gre_v)::numeric, 2), 
-               ROUND(AVG(gre_aw)::numeric, 2)
-        FROM applicants
-        WHERE gpa IS NOT NULL AND gre IS NOT NULL AND gre_v IS NOT NULL AND gre_aw IS NOT NULL;
+        SELECT
+          ROUND(AVG(gpa)::numeric, 2),
+          ROUND(AVG(gre)::numeric, 2),
+          ROUND(AVG(gre_v)::numeric, 2),
+          ROUND(AVG(gre_aw)::numeric, 2)
+        FROM applicants;
     """)
     q3 = cur.fetchone()
 
-    # Question 4
+    # Question 4 query
     cur.execute("""
-        SELECT gpa FROM applicants
-        WHERE TRIM(start_date) = 'Fall 2024'
-          AND LOWER(applicant_type) = 'american'
-          AND gpa IS NOT NULL;
+        SELECT ROUND(AVG(gpa)::numeric, 2)
+        FROM applicants
+        WHERE TRIM(term) = 'Fall 2025'
+            AND LOWER(us_or_international) = 'american';
     """)
     gpas = [float(row[0]) for row in cur.fetchall()]
     q4 = round(sum(gpas) / len(gpas), 2) if gpas else "N/A"
 
-    # Question 5
-    cur.execute("SELECT COUNT(*) FROM applicants WHERE TRIM(start_date) = 'Fall 2024';")
+    # Question 5 query
+    cur.execute("SELECT COUNT(*) FROM applicants WHERE TRIM(term) = 'Fall 2025';")
     total_fall = cur.fetchone()[0]
-    cur.execute("SELECT COUNT(*) FROM applicants WHERE TRIM(start_date) = 'Fall 2024' AND LOWER(applicant_status) LIKE '%accepted%';")
+    cur.execute("SELECT COUNT(*) FROM applicants WHERE TRIM(term) = 'Fall 2025' AND LOWER(status) LIKE '%accepted%';")
     accepted = cur.fetchone()[0]
     q5 = round((accepted / total_fall) * 100, 2) if total_fall else "N/A"
 
-    # Question 6
+    # Question 6 query
     cur.execute("""
-        SELECT gpa FROM applicants
-        WHERE TRIM(start_date) = 'Fall 2024'
-          AND LOWER(applicant_status) LIKE '%accepted%'
-          AND gpa IS NOT NULL;
+        SELECT ROUND(AVG(gpa)::numeric, 2)
+        FROM applicants
+        WHERE TRIM(term) = 'Fall 2025'
+          AND LOWER(status) LIKE '%accepted%';
     """)
-    gpas = [float(row[0]) for row in cur.fetchall()]
-    q6 = round(sum(gpas) / len(gpas), 2) if gpas else "N/A"
+    q6 = cur.fetchone()[0] or "N/A"
 
-    # Question 7 — now using 'program' instead of university+program separately
+    # Question 7 query
     cur.execute("""
         SELECT COUNT(*) FROM applicants
         WHERE LOWER(program) LIKE 'johns hopkins university%computer science%'
@@ -76,12 +75,12 @@ def get_all_query_results():
         "q7": q7
     }
 
-# CLI Output
+# Output with answers to the terminal
 if __name__ == "__main__":
     results = get_all_query_results()
 
-    print("1. How many entries do you have in your database who have applied for Fall 2024?")
-    print(f"Answer: {results['q1']} applicants applied for Fall 2024.\n")
+    print("1. How many entries do you have in your database who have applied for Fall 2025?")
+    print(f"Answer: {results['q1']} applicants applied for Fall 2025.\n")
 
     print("2. What percentage of entries are from international students (not American or Other)?")
     print(f"Answer: {results['q2']}%\n")
@@ -89,13 +88,13 @@ if __name__ == "__main__":
     print("3. What is the average GPA, GRE, GRE V, GRE AW of applicants who provide these metrics?")
     print(f"Answer:\nAverage GPA: {results['q3'][0]}\nAverage GRE: {results['q3'][1]}\nAverage GRE V: {results['q3'][2]}\nAverage GRE AW: {results['q3'][3]}\n")
 
-    print("4. What is the average GPA of American students in Fall 2024?")
+    print("4. What is the average GPA of American students in Fall 2025?")
     print(f"Answer: {results['q4']}\n")
 
-    print("5. What percent of entries for Fall 2024 are Acceptances (to two decimal places)?")
+    print("5. What percent of entries for Fall 2025 are Acceptances (to two decimal places)?")
     print(f"Answer: {results['q5']}%\n")
 
-    print("6. What is the average GPA of applicants who applied for Fall 2024 and were accepted?")
+    print("6. What is the average GPA of applicants who applied for Fall 2025 and were accepted?")
     print(f"Answer: {results['q6']}\n")
 
     print("7. How many entries are from applicants who applied to Johns Hopkins University for a master's degree in Computer Science?")
