@@ -1,14 +1,13 @@
 Welcome to the Pizza Ordering Service!
 ======================================
 
-This documentation describes the structure and usage of the pizza ordering application, including the `Order` and `Pizza` classes.
+This is the developer documentation for the pizza ordering application.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Modules:
+   :caption: Modules
 
-   order
-   pizza
+   src
 
 Indices and tables
 ==================
