@@ -1,16 +1,30 @@
 class Order:
-  def __init__(self):
-      self.pizzas = []
-      self.total_cost = 0
-      self.paid = False
+    """
+    A class to house the customer order.
 
-  def input_pizza(self, pizza):
-      self.pizzas.append(pizza)
-      self.total_cost += pizza.cost()
+    Attributes:
+        pizzas (list): A list of Pizza objects.
+        total_cost (float): Total cost of all pizzas in the order.
+        paid (bool): Whether the order is marked as paid.
+    """
 
-  def order_paid(self):
-      self.paid = True
+    def __init__(self):
+        self.pizzas = []
+        self.total_cost = 0
+        self.paid = False
 
-  def __str__(self):
-      pizza_descriptions = '\n'.join(str(pizza) for pizza in self.pizzas)
-      return f"Order Summary:\n{pizza_descriptions}\nTotal Cost: ${self.total_cost}"
+    def input_pizza(self, pizza):
+        """
+        Add a Pizza object to the Order.
+
+        Parameters:
+            pizza (Pizza): A pizza to add to the order.
+        """
+        self.pizzas.append(pizza)
+        self.total_cost += pizza.cost()
+
+    def order_paid(self):
+        """
+        Set the order as paid.
+        """
+        self.paid = True
