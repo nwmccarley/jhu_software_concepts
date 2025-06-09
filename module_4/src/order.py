@@ -2,10 +2,9 @@ class Order:
     """
     A class to house the customer order.
 
-    Attributes:
-        pizzas (list): A list of Pizza objects.
-        total_cost (float): Total cost of all pizzas in the order.
-        paid (bool): Whether the order is marked as paid.
+    :ivar pizzas: A list of Pizza objects.
+    :ivar total_cost: The total cost of the order.
+    :ivar paid: Boolean indicating if the order is paid.
     """
 
     def __init__(self):
@@ -17,8 +16,10 @@ class Order:
         """
         Add a Pizza object to the Order.
 
-        Parameters:
-            pizza (Pizza): A pizza to add to the order.
+        :param pizza: A Pizza object to be added.
+        :type pizza: Pizza
+        :return: None
+        :rtype: None
         """
         self.pizzas.append(pizza)
         self.total_cost += pizza.cost()
@@ -26,5 +27,8 @@ class Order:
     def order_paid(self):
         """
         Set the order as paid.
+
+        :return: None
+        :rtype: None
         """
         self.paid = True
