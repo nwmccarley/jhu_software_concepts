@@ -1,7 +1,7 @@
-Order Module
-============
+src.order module
+================
 
-.. automodule:: order
+.. automodule:: src.order
    :members:
    :undoc-members:
    :show-inheritance:
