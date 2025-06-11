@@ -1,7 +1,7 @@
-src.pizza module
-================
+pizza module
+============
 
-.. automodule:: src.pizza
+.. automodule:: pizza
    :members:
    :undoc-members:
    :show-inheritance:

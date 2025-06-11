@@ -7,8 +7,8 @@ This is the developer documentation for the pizza ordering application.
    :maxdepth: 2
    :caption: Modules
 
-   src.order
-   src.pizza
+   order
+   pizza
 
 Indices and tables
 ==================
