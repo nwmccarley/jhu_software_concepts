@@ -1,7 +1,16 @@
-src.order module
-================
+Welcome to the Pizza Ordering Service!
+======================================
 
-.. automodule:: src.order
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. toctree::
+   :maxdepth: 2
+   :caption: Modules
+
+   order
+   pizza
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
