@@ -1,4 +1,4 @@
-pizza module
+Pizza Module
 ============
 
 .. automodule:: pizza

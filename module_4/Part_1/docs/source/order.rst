@@ -1,4 +1,4 @@
-order module
+Order Module
 ============
 
 .. automodule:: order
