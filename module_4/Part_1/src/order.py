@@ -4,7 +4,7 @@ class Order:
 
     :ivar pizzas: A list of Pizza objects.
     :ivar total_cost: The total cost of the order.
-    :ivar paid: Boolean indicating if the order is paid.
+    :ivar paid: Boolean flag for payment status.
     """
 
     def __init__(self):
@@ -16,7 +16,7 @@ class Order:
         """
         Add a Pizza object to the Order.
 
-        :param pizza: A Pizza object to be added.
+        :param pizza: The Pizza to add
         :type pizza: Pizza
         :return: None
         :rtype: None
