@@ -1,3 +1,5 @@
+from pizza import Pizza
+
 class Order:
     """
     A class to house the customer order.
@@ -32,3 +34,16 @@ class Order:
         :rtype: None
         """
         self.paid = True
+
+    def __str__(self):
+        """
+        Return a string representation of the order.
+
+        :return: String description
+        :rtype: str
+        """
+        result = []
+        for i, pizza in enumerate(self.pizzas, 1):
+            result.append(f"Pizza #{i}: {str(pizza)}")
+        result.append(f"Total: ${self.total_cost}")
+        return "\n".join(result)

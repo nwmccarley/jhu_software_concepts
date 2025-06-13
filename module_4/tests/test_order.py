@@ -1,6 +1,9 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 import pytest
-from pizza import Pizza
 from order import Order
+from pizza import Pizza
 
 @pytest.mark.order
 def test_order_init():
@@ -8,7 +11,7 @@ def test_order_init():
     assert order.pizzas == []
     assert order.total_cost == 0
     assert order.paid is False
-
+#Test oder
 @pytest.mark.order
 def test_order_str():
     order = Order()
@@ -19,7 +22,7 @@ def test_order_str():
     assert f"${pizza.cost()}" in str(order)
 
 @pytest.mark.order
-def test_order_input_pizza_updates_cost():
+def test_input_pizza_():
     order = Order()
     pizza = Pizza("thin", ["marinara"], "mozzarella", ["mushrooms"])
     cost_before = order.total_cost
@@ -28,7 +31,7 @@ def test_order_input_pizza_updates_cost():
     assert pizza in order.pizzas
 
 @pytest.mark.order
-def test_order_paid_updates_flag():
+def test_order_paid():
     order = Order()
     assert order.paid is False
     order.order_paid()

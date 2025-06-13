@@ -1,9 +1,13 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 import pytest
 from order import Order
 from pizza import Pizza
-
+#Markers for integration tests
 @pytest.mark.order
 @pytest.mark.pizza
+#mutliple pizzas order test case
 def test_multiple_pizzas_total_cost():
     order = Order()
 

@@ -1,0 +1,4 @@
+1. Nickolas Mccarley nmccarl1@jh.edu
+2. Module 3 we are tasked with with creating a program that handles the different orders, costs and topping for a pizza ordering business, then running pytest to verify it works as expected, and display our documentation on readthedocs . Due 6/15/2025
+3. For my approach I used the outlined examples to develop order.py and pizza .py in the src subfolder. Then the 4 test files are ran and called using pytest, They are in the tests folder as test_integration, test_order, and test pizza. Calling pytest shows all tests are passed. I then used sphinx and set up the sphinx documentation folders to pass this information to readthedocs. The docs folder also contains my html for readthedocs. A link to my site can be found in link.txt
+4. No bugs are known but  on readthedocs sometimes I had to refresh to get everything to show up properly. Shouldn't effect the end user but I thought it was worth noting.
