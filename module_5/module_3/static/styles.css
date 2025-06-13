@@ -1,0 +1,31 @@
+/* Main title at the top left */
+.title {
+  color: #007bff; /* Bootstrap blue */
+  font-weight: bold;
+  font-size: 1.75rem;
+}
+
+/* Section header (e.g., "Analysis") */
+.section-label {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+/* Grey background box around each question and answer */
+.question-box {
+  background-color: #f8f9fa; /* light gray */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ensure values on the right are properly aligned */
+.question-box span {
+  text-align: right;
+  flex-shrink: 0;
+}
