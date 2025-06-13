@@ -1,5 +1,5 @@
 """Flask app to display applicant query data in a dashboard."""
-
+#code converted from module_3 to get a 10/10 Lint Score
 from flask import Flask, render_template
 from query_data import get_all_query_results
 
@@ -54,4 +54,4 @@ def create_app():
 
 if __name__ == "__main__":
     APP = create_app()
-    APP.run(port=8000, debug=True)
+    APP.run(port=8001, debug=True)

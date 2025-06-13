@@ -1,13 +1,12 @@
 """Script to load applicant data from JSON and insert it into a PostgreSQL database."""
-
+#code converted from module_3 to get a 10/10 Lint Score
+#code also converted to meet the assignment changes for module 5
 import json
 from datetime import datetime
-import psycopg2
 from psycopg2 import pool, sql
 
-# PostgreSQL connection
 DATABASE_URL = (
-    "postgresql://neondb_owner:npg_PhLQBRjM7Cb3@ep-withered-hall-a5aocygy.us-east-2."
+    "postgresql://neondb_owner:npg_QfOgeElx0Ro4@ep-gentle-bar-a6pcqxvm.us-west-2."
     "aws.neon.tech/neondb?sslmode=require"
 )
 
@@ -67,21 +66,25 @@ def prepare_values(data):
     for row in data:
         university = row.get("University", "").strip()
         program = row.get("Program", "").strip()
-        program_combined = f"{university} - {program}" if university or program else None
-        values.append((
-            program_combined,
-            row.get("Degree"),
-            parse_date(row.get("Date Information Added to Grad Cafe")),
-            row.get("Applicant Status"),
-            row.get("Start Date"),
-            parse_float(row.get("GRE")),
-            parse_float(row.get("GRE V")),
-            parse_float(row.get("GRE AW")),
-            parse_float(row.get("GPA")),
-            row.get("International/American Student"),
-            row.get("Comments"),
-            row.get("Url link")
-        ))
+        program_combined = (
+            f"{university} - {program}" if university or program else None
+        )
+        values.append(
+            (
+                program_combined,
+                row.get("Degree"),
+                parse_date(row.get("Date Information Added to Grad Cafe")),
+                row.get("Applicant Status"),
+                row.get("Start Date"),
+                parse_float(row.get("GRE")),
+                parse_float(row.get("GRE V")),
+                parse_float(row.get("GRE AW")),
+                parse_float(row.get("GPA")),
+                row.get("International/American Student"),
+                row.get("Comments"),
+                row.get("Url link"),
+            )
+        )
     return values
 
 
@@ -89,13 +92,14 @@ def insert_records(cursor, connection, values, chunk_size=1000):
     """Insert values into the applicants table in chunks."""
     insert_stmt = sql.SQL(
         """
-        INSERT INTO applicants (
+        INSERT INTO {table} (
             program, degree, date_added, status,
             term, gre, gre_v, gre_aw, gpa, us_or_international,
             comments, url
         ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
-    )
+    ).format(table=sql.Identifier("applicants"))
+
     total = len(values)
     print(f"Starting insert of {total} applicant records...")
     for i in range(0, total, chunk_size):
@@ -112,7 +116,6 @@ def main():
     cur = conn.cursor()
 
     create_table(cur)
-
     data = load_applicants("applicant_data.json")
     values = prepare_values(data)
     insert_records(cur, conn, values)
